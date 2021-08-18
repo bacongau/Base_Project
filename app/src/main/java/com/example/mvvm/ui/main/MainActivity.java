@@ -10,6 +10,10 @@ import com.example.mvvm.R;
 import com.example.mvvm.adapter.PostAdapter;
 import com.example.mvvm.base.BaseActivity;
 import com.example.mvvm.databinding.ActivityMainBinding;
+import com.example.mvvm.model.Post;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 
 /**
@@ -23,11 +27,23 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
     private DemoViewModel demoViewModel;
 
 
+    @Named("Str_app_module")
+    @Inject
+    String strAppModule;
+
+    @Named("Str_test_module")
+    @Inject
+    String strTestModule;
+
+    @Named("Post_Test_module")
+    @Inject
+    Post postTestModule;
+
+
     @NonNull
     @Override
     protected MainViewModel createViewModel() {
-        MainViewModelFactory factory = new MainViewModelFactory();
-        return new ViewModelProvider(this, factory).get(MainViewModel.class);
+        return new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
     }
 
     @Override
@@ -37,6 +53,12 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
     @Override
     protected void initView() {
+        // log test
+        Log.d(TAG, "strAppModule: " + strAppModule);
+        Log.d(TAG, "strTestModule: " + strTestModule);
+        Log.d(TAG, "post: " + postTestModule.getTitle());
+
+
         demoViewModel = new ViewModelProvider(this).get(DemoViewModel.class);
 
         demoViewModel.test.observe(this, s -> {

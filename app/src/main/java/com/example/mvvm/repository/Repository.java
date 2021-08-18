@@ -8,6 +8,8 @@ import com.example.mvvm.model.response.LoginResponse;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -16,8 +18,9 @@ import okhttp3.RequestBody;
 public class Repository {
     private final ApiService apiService;
 
-    public Repository() {
-        this.apiService = ApiClient.getInstance().getApiService();
+    @Inject
+    public Repository(ApiService apiService) {
+        this.apiService = apiService;
     }
 
     public Single<ArrayList<Post>> getPost() {

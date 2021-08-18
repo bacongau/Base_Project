@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 /**
  * Created by Kidd on 18/12/2018.
  */
@@ -25,8 +27,9 @@ public class MainViewModel extends BaseViewModel {
         return listPost;
     }
 
-    MainViewModel() {
-        this.repository = new Repository();
+    @Inject
+    public MainViewModel(Repository repository) {
+        this.repository = repository;
     }
 
     public void getListPost(){

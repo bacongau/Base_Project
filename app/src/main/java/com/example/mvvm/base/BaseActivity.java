@@ -5,8 +5,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mvvm.custom.LoadingDialog;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 
 /**
  * Created by Kidd on 07/01/2019.
@@ -17,12 +22,16 @@ public abstract class BaseActivity<VM extends BaseViewModel,T extends ViewDataBi
     protected T binding;
     protected LoadingDialog loadingDialog;
 
+    @Inject
+    protected ViewModelProvider.Factory viewModelFactory;
+
     @NonNull
     protected abstract VM createViewModel();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         viewModel = createViewModel();
         loadingDialog = new LoadingDialog(this);

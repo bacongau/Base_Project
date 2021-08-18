@@ -6,6 +6,8 @@ import com.example.mvvm.base.BaseViewModel;
 import com.example.mvvm.repository.Repository;
 import com.example.mvvm.utils.Utils;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -21,8 +23,9 @@ public class LoginViewModel extends BaseViewModel {
 
     private MutableLiveData<String> error = new MutableLiveData<>();
 
-    public LoginViewModel() {
-        this.repository = new Repository();
+    @Inject
+    public LoginViewModel(Repository repository) {
+        this.repository = repository;
     }
 
     public MutableLiveData<String> getError() {

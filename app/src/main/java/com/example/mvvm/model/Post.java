@@ -7,6 +7,13 @@ public class Post {
     private String body;
     private int color;
 
+    public Post(String userId, String id, String title, String body) {
+        this.userId = userId;
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
     public int getColor() {
         return color;
     }
